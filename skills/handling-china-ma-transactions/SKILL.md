@@ -5,10 +5,20 @@ description: Use when advising on China-focused investment or M&A transactions, 
 
 # Handling China M&A Transactions
 
+## Product
+
+Treat this as a **中国投资并购决策与执行 Skill**. Use this **三维决策内核**:
+
+1. **控制权**：define what power or rights end-state the transaction must achieve and when;
+2. **收购方式**：compare the tools, combinations and sequence used to reach that state;
+3. **合并财务报表**：test whether the resulting facts support the intended accounting assessment and evidence package.
+
+Diligence, approvals, documents, negotiation and closing are execution layers serving the three axes. They do not replace the kernel.
+
 ## Core rules
 
 - Default to the buyer perspective when the user does not state a side. Declare `Perspective: Buyer`; when asked for the seller, declare `Perspective: Seller` and switch substantively.
-- Cover the transaction lifecycle: structure → contact/NDA → diligence → documents/negotiation → signing → effectiveness/approvals → closing → post-closing/integration → claims.
+- Use the three-axis kernel before working the lifecycle: structure → contact/NDA → diligence → documents/negotiation → signing → effectiveness/approvals → closing → post-closing/integration → claims.
 - Keep legal authority, regulatory/case observation, historical/draft material and market playbook separate.
 - Treat the supplied listed-company article and deal tables as issue seeds, never as controlling authority.
 - Convert every material fact into a transaction response: price, CP, deliverable, warranty/disclosure, indemnity/limitation, covenant, termination, security or post-close action.
@@ -19,6 +29,15 @@ description: Use when advising on China-focused investment or M&A transactions, 
 Read [intake-routing-and-gates.md](references/intake-routing-and-gates.md) and [legal-authority-protocol.md](references/legal-authority-protocol.md). Establish the matter profile, as-of date, route, stage, confidentiality level, missing facts, requested deliverable and completion state.
 
 For an unannounced listed-company transaction, treat MNPI as a hard gate. Do not put names, prices, unannounced structures or document text into external searches. Use abstract legal queries and the least necessary information.
+
+## Run the three-axis kernel
+
+Read [three-axis-transaction-engine.md](references/three-axis-transaction-engine.md) for every transaction matter. Assign each axis `required`, `not-sought`, `not-applicable`, `pending-professional-confirmation` or `blocked`; never omit an axis silently.
+
+- `L-CONTROL`: always complete all three axes.
+- `P-EQUITY` and `P-ASSET`: adapt the meaning to the route and state expressly when control or consolidation is not pursued or requires professional confirmation.
+- Structure requests: compare at least three paths when facts permit; otherwise state each eliminated path and its reason.
+- Non-structure requests: identify the affected axes without fabricating a full structure memorandum.
 
 ## Route
 
@@ -37,6 +56,7 @@ Combine routes only for a real hybrid. Pure minority financing with no control, 
 - Merger control, SOE, foreign investment, ODI/FX, data, sector, labor, IP or tax interfaces: [regulatory-overlays.md](references/regulatory-overlays.md).
 - Consolidation or purchase-date questions: [accounting-control-and-consolidation.md](references/accounting-control-and-consolidation.md).
 - The supplied article, Taisheng Wind Power conditions or historical approval table: [article-and-deal-seeds.md](references/article-and-deal-seeds.md).
+- The mandatory control → acquisition method → consolidation workflow: [three-axis-transaction-engine.md](references/three-axis-transaction-engine.md).
 - Deliverable structure and completion state: [output-contract.md](references/output-contract.md).
 
 The structured authority registry is [legal-authorities.json](references/legal-authorities.json). Do not load it wholesale. Query it:
@@ -84,6 +104,7 @@ Use these assets when useful:
 - [due-diligence-issue-list-template.md](assets/due-diligence-issue-list-template.md)
 - [approval-matrix-template.md](assets/approval-matrix-template.md)
 - [negotiation-plan-template.md](assets/negotiation-plan-template.md)
+- [three-axis-structure-template.md](assets/three-axis-structure-template.md)
 
 The first page must state matter, route, perspective, as-of date, materials/versions, assumptions, jurisdiction and one of: `passed`, `passed_with_limitations`, `blocked`.
 
