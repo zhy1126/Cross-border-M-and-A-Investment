@@ -10,6 +10,22 @@ VALIDATOR = ROOT / "scripts" / "validate_skill_consistency.py"
 
 
 class SkillConsistencyTests(unittest.TestCase):
+    def test_pe_vc_handoff_asset_carries_router_context(self):
+        asset = ROOT / "assets" / "pe-vc-handoff-template.md"
+        self.assertTrue(asset.exists(), "PE/VC handoff asset is missing")
+        text = asset.read_text(encoding="utf-8")
+        for token in (
+            "$pe-vc-transaction-docs-review",
+            "三维状态",
+            "转交理由",
+            "控制风险触发器",
+            "文件与版本",
+            "审阅立场",
+            "期望交付",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
     def test_every_asset_declares_common_matter_metadata(self):
         required_fields = [
             "事项：",

@@ -47,7 +47,7 @@ Read [three-axis-transaction-engine.md](references/three-axis-transaction-engine
 | `P-EQUITY` | Private-company share/equity acquisitions, control investments, staged deals and statutory-merger comparison | [private-equity-ma.md](references/private-equity-ma.md) |
 | `P-ASSET` | Asset/business purchases and carve-outs | [private-asset-ma.md](references/private-asset-ma.md) |
 
-Combine routes only for a real hybrid. Pure minority financing with no control, business or asset acquisition belongs in the PE/VC financing-review skill.
+Combine routes only for a real hybrid. For pure minority financing with no control, business or asset acquisition, record the three-axis boundary, prepare [pe-vc-handoff-template.md](assets/pe-vc-handoff-template.md), then invoke `$pe-vc-transaction-docs-review`. If its document review finds rights that may create control, joint control or decisive influence, return to this Skill for `P-EQUITY` and regulatory analysis.
 
 ## Load only what the task needs
 
@@ -105,6 +105,7 @@ Use these assets when useful:
 - [approval-matrix-template.md](assets/approval-matrix-template.md)
 - [negotiation-plan-template.md](assets/negotiation-plan-template.md)
 - [three-axis-structure-template.md](assets/three-axis-structure-template.md)
+- [pe-vc-handoff-template.md](assets/pe-vc-handoff-template.md)
 
 The first page must state matter, route, perspective, as-of date, materials/versions, assumptions, jurisdiction and one of: `passed`, `passed_with_limitations`, `blocked`.
 

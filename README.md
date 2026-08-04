@@ -2,7 +2,7 @@
 
 > 以“控制权—收购方式—合并财务报表”为三维决策内核，把交易目标转化为结构方案，并进一步落实为尽调、审批、条款、谈判、交割和失败预案。
 
-`中国法域 v1` · `Buyer 默认` · `Seller 可切换` · `44 条版本化法源记录` · `27 项自动测试`
+`中国法域 v1` · `Buyer 默认` · `Seller 可切换` · `44 条版本化法源记录` · `28 项自动测试`
 
 当前 Skill：[`handling-china-ma-transactions`](skills/handling-china-ma-transactions/SKILL.md)
 
@@ -30,7 +30,7 @@
 - **审批与交割**：经营者集中、国资、外资准入、安全审查、ODI/外汇、数据、技术出口和出口管制；
 - **中国买方收购境外目标**：完成中国侧工作流，并把目标所在地法律交给当地合资格律师确认。
 
-纯新增少数股权融资且不以取得控制、业务或资产为目的时，本 Skill 只做三维定性和路由，实质条款审阅转交专门的 PE/VC 融资文件审阅能力。
+纯新增少数股权融资且不以取得控制、业务或资产为目的时，本 Skill 只做三维定性和路由，通过[标准交接包](skills/handling-china-ma-transactions/assets/pe-vc-handoff-template.md)调用 `$pe-vc-transaction-docs-review` 完成实质条款审阅；如果审阅发现保护性事项可能形成控制、共同控制或决定性影响，再回调本 Skill。
 
 ## 能力地图
 
@@ -58,7 +58,9 @@
 ```mermaid
 flowchart TD
     A["用户问题 / 交易材料"] --> B["入项闸门：立场、阶段、法域、材料、保密"]
-    B --> C{"交易路由"}
+    B --> X{"实质并购？"}
+    X -->|"是"| C{"交易路由"}
+    X -->|"纯新增少数融资"| V["PE/VC 交接包 → 融资文件审阅 Skill"]
     C -->|"上市控制权"| L["L-CONTROL"]
     C -->|"非上市股权"| P["P-EQUITY"]
     C -->|"资产或业务"| Q["P-ASSET"]
@@ -139,6 +141,15 @@ flowchart TD
 
 </details>
 
+<details>
+<summary><strong>6. 纯少数融资转交 PE/VC 审阅</strong></summary>
+
+```text
+先使用 $handling-china-ma-transactions 判断该15%新增投资是否涉及控制、共同控制、业务或资产收购；如属于纯少数融资，请生成PE/VC交接包，并调用 $pe-vc-transaction-docs-review 从投资人立场审阅增资协议、股东协议和章程。重点关注信息权、优先认购权、保护性事项及跨文件冲突；如治理条款可能形成控制或决定性影响，请回调并购Skill重新分析。
+```
+
+</details>
+
 ## 输出示例
 
 ```text
@@ -199,4 +210,4 @@ python3 scripts/validate_skill_consistency.py
 - 材料缺失、版本不清、扫描不可读或数据室未更新时，不会声称已经完成全面尽调。
 - 本 Skill 是交易分析和工作流工具，不构成对具体事项的正式法律意见。
 
-进一步阅读：[`SKILL.md`](skills/handling-china-ma-transactions/SKILL.md) · [三维交易决策内核](skills/handling-china-ma-transactions/references/three-axis-transaction-engine.md) · [三维结构模板](skills/handling-china-ma-transactions/assets/three-axis-structure-template.md) · [法源与时效协议](skills/handling-china-ma-transactions/references/legal-authority-protocol.md) · [结构化法源库](skills/handling-china-ma-transactions/references/legal-authorities.json)
+进一步阅读：[`SKILL.md`](skills/handling-china-ma-transactions/SKILL.md) · [三维交易决策内核](skills/handling-china-ma-transactions/references/three-axis-transaction-engine.md) · [三维结构模板](skills/handling-china-ma-transactions/assets/three-axis-structure-template.md) · [PE/VC交接包](skills/handling-china-ma-transactions/assets/pe-vc-handoff-template.md) · [法源与时效协议](skills/handling-china-ma-transactions/references/legal-authority-protocol.md) · [结构化法源库](skills/handling-china-ma-transactions/references/legal-authorities.json)
