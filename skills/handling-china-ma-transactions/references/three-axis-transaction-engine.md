@@ -49,7 +49,7 @@
 
 ## 4. 靶点：合并财务报表
 
-先把该维标记为 `required`、`not-sought`、`not-applicable` 或 `pending-professional-confirmation`。并表为硬目标时，从前两维提取：
+先把该维标记为 `required`、`not-sought`、`not-applicable`、`pending-professional-confirmation` 或 `blocked`。并表为硬目标但尚待审计师基于完整事实确认时使用 `pending-professional-confirmation`；现有结构明显不能支持硬性目标，且缺口不是单纯专业确认可以解决时使用 `blocked`。从前两维提取：
 
 - 交易完成前后的持股、表决权和全面摊薄表；
 - 相关活动及其决策机制；
@@ -73,7 +73,7 @@
 | `P-EQUITY` | 处理现有股权收购、控制型增资、分步收购及与并购实质相连的少数股权安排；区分少数保护、共同控制和单独控制；不追求控制或并表时显式写 `not-sought` |
 | `P-ASSET` | 第一维改为收购边界及业务/资产经营主导权；第二维比较资产、业务、股权和 carve-out；第三维识别资产收购、业务合并、会计范围和购买日并交专业人士确认 |
 
-纯新增少数股权融资且不以取得控制、业务或资产为目的时，先记录控制权与并表均为 `not-sought`，说明该事项超出本 Skill 的实质并购边界，使用 [pe-vc-handoff-template.md](../assets/pe-vc-handoff-template.md) 形成交接包，再转交 PE/VC 融资文件审阅能力 `$pe-vc-transaction-docs-review`；不得继续以 `P-EQUITY` 全面审阅融资条款。若少数股权交易是现有股权收购、分步取得控制的前置步骤，或与业务/资产收购不可分，则保留在 `P-EQUITY`，并写明并购实质。目标 Skill 审阅保护性事项、董事席位或法定人数后，如发现可能形成控制、共同控制或决定性影响，应回调本 Skill 重新分析。
+只有经 `P-EQUITY` 筛查确认的未上市公司纯新增少数股权融资，且控制权与并表均明确为 `not-sought`、不以取得业务或资产为目的时，才使用 [pe-vc-handoff-template.md](../assets/pe-vc-handoff-template.md) 形成交接包，再转交 PE/VC 融资文件审阅能力 `$pe-vc-transaction-docs-review`；上市公司发行和 `P-ASSET` 不使用该交接，控制状态尚待确认时保留在本 Skill 或双轨处理。若少数股权交易是现有股权收购、分步取得控制的前置步骤，或与业务/资产收购不可分，则保留在 `P-EQUITY`，并写明并购实质。交接包要求目标 Skill 审阅保护性事项、董事席位或法定人数后，如发现可能形成控制、共同控制或决定性影响，回调本 Skill 重新分析；该双向调用以当前环境已经安装两个 Skill 为前提。
 
 纯法条查询无需虚构完整结构，但应说明该规则通常影响哪一维。非结构类交付物只展开相关部分，同时标注其 `影响维度`。
 

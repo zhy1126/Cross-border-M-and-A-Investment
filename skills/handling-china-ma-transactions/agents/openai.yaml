@@ -1,4 +1,4 @@
 interface:
   display_name: "中国投资并购交易"
   short_description: "以三维决策内核驱动中国并购结构与执行"
-  default_prompt: "Use $handling-china-ma-transactions from the buyer perspective. First analyze 控制权、收购方式、合并财务报表 as the 三维 decision kernel, then map diligence, approvals, terms, negotiation and closing actions to the affected axes."
+  default_prompt: "Use $handling-china-ma-transactions from the buyer perspective. For structure requests, analyze 控制权、收购方式、合并财务报表 in that causal order as the 三维 decision kernel, then map diligence, approvals, terms, negotiation and closing actions to the affected axes. For non-structure requests, identify only the affected axes and do not fabricate a full transaction structure."

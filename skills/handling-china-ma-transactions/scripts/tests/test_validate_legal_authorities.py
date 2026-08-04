@@ -106,6 +106,26 @@ class AuthorityIndexTests(unittest.TestCase):
         self.assertIn(adjustment["authority_id"], base["superseded_by"])
         self.assertIn(base["authority_id"], adjustment["supersedes"])
 
+    def test_asset_and_business_combination_accounting_authorities(self):
+        topics = set(self.payload["coverage_topics"])
+        self.assertIn("accounting-business-combination", topics)
+        self.assertIn(
+            "accounting-business-combination",
+            self.payload["coverage_matrix"]["P-ASSET"],
+        )
+        records = {record["authority_id"]: record for record in self.payload["authorities"]}
+        expected = {
+            "MOF-ASBE-20-BUSINESS-COMBINATIONS-2006",
+            "MOF-ASBE-INTERPRETATION-13-2019",
+        }
+        self.assertTrue(expected <= set(records))
+        for authority_id in expected:
+            self.assertIn(
+                "accounting-business-combination",
+                records[authority_id]["topics"],
+            )
+            self.assertEqual(records[authority_id]["status"], "effective")
+
     def test_official_urls_match_allowlist(self):
         domains = tuple(self.payload["official_domain_allowlist"])
         for record in self.payload["authorities"]:

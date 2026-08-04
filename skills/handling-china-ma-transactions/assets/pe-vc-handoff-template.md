@@ -1,8 +1,8 @@
 # PE/VC 融资审阅交接包
 
 事项：  
-路由：OUT-PEVC（来源筛查可为 L-CONTROL / P-EQUITY / P-ASSET）  
-立场：Buyer（默认） / Seller / Investor / Company / Founder  
+路由：OUT-PEVC（仅由 P-EQUITY 筛查转出；L-CONTROL / P-ASSET 不得使用本交接）
+立场：来源事项立场 Buyer / Seller / 未知；不得自动映射为目标审阅立场
 As-of / 法律核验日：  
 材料范围 / 版本：  
 关键假设：  
@@ -19,9 +19,9 @@ As-of / 法律核验日：
 
 | 维度 | 状态 | 已确认事实 | 风险触发器 |
 |---|---|---|---|
-| 控制权 | not-sought / pending-professional-confirmation |  |  |
+| 控制权 | not-sought |  |  |
 | 收购方式 | not-applicable；事项实质为新增融资 |  |  |
-| 合并财务报表 | not-sought / pending-professional-confirmation |  |  |
+| 合并财务报表 | not-sought |  |  |
 
 ## 转交理由
 
@@ -30,7 +30,7 @@ As-of / 法律核验日：
 - [ ] 不属于分步取得控制或其他并购组合的一部分；
 - [ ] 用户需要融资文件、投资人权利、市场惯例或多轮红线审阅。
 
-若任一项不能确认，先留在 `$handling-china-ma-transactions` 完成并购实质和交易路由判断。
+只有全部勾选，且控制权与合并财务报表均明确为 `not-sought`，才可转交。若任一项不能确认或状态仍为 `pending-professional-confirmation`，先留在 `$handling-china-ma-transactions`，或对文件审阅和控制分析实行双轨处理。
 
 ## 控制风险触发器
 
@@ -52,8 +52,9 @@ As-of / 法律核验日：
 
 ## 审阅立场
 
+- 来源事项立场：Buyer / Seller / 未知：
 - 用户角色 / 审阅目的：
-- 代表方：Investor / Lead / Follow-on / Strategic / Company / Founder：
+- 目标审阅立场：Investor / Lead / Follow-on / Strategic / Company / Founder / pending：
 - 架构：RMB onshore / Offshore USD direct / Offshore USD VIE：
 - 适用法律 / 争议解决：
 - 当前轮次及版本基线：
@@ -71,4 +72,5 @@ As-of / 法律核验日：
 
 - 并购 Skill 不替目标 Skill 判断市场惯例、生成融资条款或追踪多轮谈判；
 - 目标 Skill 不以“保护性权利”标签替代控制实质分析；
-- 如控制风险触发器被命中，两个 Skill 按“融资文件审阅继续、控制与并购结构回调”的方式并行分工。
+- 目标审阅立场未明确时，只做中性文件地图和风险定位，不从来源事项的 Buyer/Seller 自动推定 Investor/Company/Founder；
+- 如控制风险触发器被命中，本交接包要求按“融资文件审阅继续、控制与并购结构回调”的方式分工；是否自动调用取决于两个 Skill 在当前环境中均已安装。

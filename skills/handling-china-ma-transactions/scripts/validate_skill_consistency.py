@@ -49,12 +49,19 @@ THREE_AXIS_SKILL_TOKENS = (
 
 THREE_AXIS_REFERENCE = "references/three-axis-transaction-engine.md"
 THREE_AXIS_ASSET = "assets/three-axis-structure-template.md"
+THREE_AXIS_CAUSAL_SEQUENCE = (
+    "先确定控制权目标",
+    "围绕控制目标生成和比较路径",
+    "从前两维提取",
+)
 THREE_AXIS_ASSET_SECTIONS = (
     "三维执行摘要",
     "控制权矩阵",
     "收购方式比较矩阵",
     "并表支持与证据矩阵",
     "跨维度依赖",
+    "P-ASSET 分支：资产边界与经营主导权",
+    "P-ASSET 分支：资产收购或业务合并",
 )
 THREE_AXIS_OUTPUT_TOKENS = (
     "三维执行摘要",
@@ -69,6 +76,40 @@ THREE_AXIS_EXECUTION_ASSETS = (
     "due-diligence-issue-list-template.md",
     "negotiation-plan-template.md",
 )
+P_ASSET_ACCOUNTING_TOKENS = (
+    "P-ASSET 分支：资产边界与经营主导权",
+    "P-ASSET 分支：资产收购或业务合并",
+    "投入与实质性加工处理过程",
+    "集中度测试",
+    "确认日 / 购买日",
+)
+PE_VC_HANDOFF_TOKENS = (
+    "仅由 P-EQUITY 筛查转出",
+    "来源事项立场",
+    "目标审阅立场",
+    "控制权 | not-sought",
+    "合并财务报表 | not-sought",
+)
+PRIVATE_ROUTE_PATH_CONTRACT = (
+    "事实允许时至少比较三个方案；不足三个时列明被排除路径及原因"
+)
+
+
+def _validate_internal_links(path: Path, root: Path) -> List[str]:
+    errors: List[str] = []
+    for target in LINK_RE.findall(path.read_text(encoding="utf-8")):
+        target = target.strip().strip("<>")
+        if not target or target.startswith("#") or "://" in target:
+            continue
+        local_target = target.split("#", 1)[0]
+        if not local_target:
+            continue
+        if not (path.parent / local_target).exists():
+            errors.append(
+                f"broken internal link in {path.relative_to(root).as_posix()}: "
+                f"{local_target}"
+            )
+    return errors
 
 
 def validate_skill(root: Path) -> List[str]:
@@ -119,6 +160,18 @@ def validate_skill(root: Path) -> List[str]:
                 "three-axis reference lacks pure minority financing handoff: "
                 f"{minority_handoff}"
             )
+        causal_positions = []
+        for token in THREE_AXIS_CAUSAL_SEQUENCE:
+            position = three_axis_reference.find(token)
+            if position < 0:
+                errors.append(f"three-axis reference breaks causal sequence: {token}")
+            else:
+                causal_positions.append(position)
+        if len(causal_positions) == len(THREE_AXIS_CAUSAL_SEQUENCE) and (
+            causal_positions != sorted(causal_positions)
+        ):
+            errors.append("three-axis reference causal sequence is out of order")
+    three_axis_asset = ""
     if not (root / THREE_AXIS_ASSET).exists():
         errors.append(f"required three-axis asset is missing: {THREE_AXIS_ASSET}")
     else:
@@ -128,6 +181,13 @@ def validate_skill(root: Path) -> List[str]:
                 errors.append(
                     f"three-axis asset lacks required section {section}: {THREE_AXIS_ASSET}"
                 )
+
+    handoff = root / "assets" / "pe-vc-handoff-template.md"
+    if handoff.exists():
+        handoff_text = handoff.read_text(encoding="utf-8")
+        for token in PE_VC_HANDOFF_TOKENS:
+            if token not in handoff_text:
+                errors.append(f"PE/VC handoff contract lacks required rule: {token}")
 
     for path in sorted(references_dir.glob("*.md")):
         relative = path.relative_to(root).as_posix()
@@ -183,12 +243,25 @@ def validate_skill(root: Path) -> List[str]:
         )
 
     accounting = references_dir / "accounting-control-and-consolidation.md"
-    if accounting.exists() and "前两维输入" not in accounting.read_text(
-        encoding="utf-8"
-    ):
-        errors.append(
-            "accounting reference lacks three-axis input contract: 前两维输入"
-        )
+    if accounting.exists():
+        accounting_text = accounting.read_text(encoding="utf-8")
+        if "前两维输入" not in accounting_text:
+            errors.append(
+                "accounting reference lacks three-axis input contract: 前两维输入"
+            )
+        for token in P_ASSET_ACCOUNTING_TOKENS:
+            if token not in accounting_text or token not in three_axis_asset:
+                errors.append(f"P-ASSET accounting contract lacks route token: {token}")
+
+    for filename in ("private-equity-ma.md", "private-asset-ma.md"):
+        path = references_dir / filename
+        if path.exists() and PRIVATE_ROUTE_PATH_CONTRACT not in path.read_text(
+            encoding="utf-8"
+        ):
+            errors.append(
+                f"{filename} lacks three-path structure contract: "
+                f"{PRIVATE_ROUTE_PATH_CONTRACT}"
+            )
 
     for filename in ("due-diligence-playbook.md", "positions-and-documents.md"):
         path = references_dir / filename
@@ -239,6 +312,9 @@ def validate_skill(root: Path) -> List[str]:
             errors.append("openai.yaml default_prompt must mention the skill explicitly")
         if "三维" not in yaml_text:
             errors.append("openai.yaml must present the three-axis product: 三维")
+        for token in ("For structure requests", "For non-structure requests"):
+            if token not in yaml_text:
+                errors.append(f"openai.yaml lacks request-scope rule: {token}")
 
     readme_path = root.parents[1] / "README.md"
     if readme_path.exists() and "中国投资并购决策与执行 Skill" not in readme_path.read_text(
@@ -249,6 +325,7 @@ def validate_skill(root: Path) -> List[str]:
         )
 
     for path in [skill_path, *references_dir.glob("*.md"), *(root / "assets").glob("*.md")]:
+        errors.extend(_validate_internal_links(path, root))
         match = PLACEHOLDER_RE.search(path.read_text(encoding="utf-8"))
         if match:
             errors.append(f"placeholder text in {path.relative_to(root)}: {match.group(0)}")

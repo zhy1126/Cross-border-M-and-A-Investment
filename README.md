@@ -2,7 +2,7 @@
 
 > 以“控制权—收购方式—合并财务报表”为三维决策内核，把交易目标转化为结构方案，并进一步落实为尽调、审批、条款、谈判、交割和失败预案。
 
-`中国法域 v1` · `Buyer 默认` · `Seller 可切换` · `44 条版本化法源记录` · `28 项自动测试`
+`中国法域 v1` · `Buyer 默认` · `Seller 可切换` · `46 条版本化法源记录` · `36 项自动测试`
 
 当前 Skill：[`handling-china-ma-transactions`](skills/handling-china-ma-transactions/SKILL.md)
 
@@ -30,7 +30,7 @@
 - **审批与交割**：经营者集中、国资、外资准入、安全审查、ODI/外汇、数据、技术出口和出口管制；
 - **中国买方收购境外目标**：完成中国侧工作流，并把目标所在地法律交给当地合资格律师确认。
 
-纯新增少数股权融资且不以取得控制、业务或资产为目的时，本 Skill 只做三维定性和路由，通过[标准交接包](skills/handling-china-ma-transactions/assets/pe-vc-handoff-template.md)调用 `$pe-vc-transaction-docs-review` 完成实质条款审阅；如果审阅发现保护性事项可能形成控制、共同控制或决定性影响，再回调本 Skill。
+只有经 `P-EQUITY` 筛查确认的未上市公司纯新增少数股权融资，且控制与并表均明确为 `not-sought` 时，本 Skill 才通过[标准交接包](skills/handling-china-ma-transactions/assets/pe-vc-handoff-template.md)调用 `$pe-vc-transaction-docs-review` 完成实质条款审阅；上市公司发行和资产/业务交易不走该交接。若审阅发现治理权利可能形成控制、共同控制或决定性影响，再回调本 Skill。双向调用以两个 Skill 均已安装为前提。
 
 ## 能力地图
 
@@ -189,6 +189,15 @@ cp -R Cross-border-M-and-A-Investment/skills/handling-china-ma-transactions ~/.c
 ```
 
 卖方任务请明确写明 `Seller` 或“卖方立场”。未写明立场时，Skill 默认买方。
+
+### 可选：安装 PE/VC 联动 Skill
+
+纯少数融资联动依赖独立维护的 [`pe-vc-transaction-docs-review`](https://github.com/hoangkiann-debug/PE_VC_transaction_docs_review)。按照其官方README，将仓库中的 `skill/pe-vc-transaction-docs-review` 目录复制或链接到 Codex Skills 目录。未安装时，本 Skill 只生成交接包和安装提示，不自行冒充融资文件审阅能力。
+
+```bash
+git clone https://github.com/hoangkiann-debug/PE_VC_transaction_docs_review.git
+cp -R PE_VC_transaction_docs_review/skill/pe-vc-transaction-docs-review ~/.codex/skills/
+```
 
 ## 验证
 

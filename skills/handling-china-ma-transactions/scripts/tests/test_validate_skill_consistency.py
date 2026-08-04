@@ -10,6 +10,94 @@ VALIDATOR = ROOT / "scripts" / "validate_skill_consistency.py"
 
 
 class SkillConsistencyTests(unittest.TestCase):
+    def test_three_axis_reference_preserves_causal_sequence(self):
+        text = (ROOT / "references" / "three-axis-transaction-engine.md").read_text(
+            encoding="utf-8"
+        )
+        tokens = (
+            "先确定控制权目标",
+            "围绕控制目标生成和比较路径",
+            "从前两维提取",
+        )
+        positions = [text.index(token) for token in tokens]
+        self.assertEqual(positions, sorted(positions))
+
+    def test_validator_rejects_broken_three_axis_causality(self):
+        spec = importlib.util.spec_from_file_location("skill_validator", VALIDATOR)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            copied_root = Path(temp_dir) / "skill"
+            shutil.copytree(ROOT, copied_root)
+            reference = (
+                copied_root / "references" / "three-axis-transaction-engine.md"
+            )
+            reference.write_text(
+                reference.read_text(encoding="utf-8").replace(
+                    "围绕控制目标生成和比较路径",
+                    "独立于控制目标罗列交易路径",
+                ),
+                encoding="utf-8",
+            )
+            errors = module.validate_skill(copied_root)
+
+        self.assertIn(
+            "three-axis reference breaks causal sequence: 围绕控制目标生成和比较路径",
+            errors,
+        )
+
+    def test_p_asset_has_route_adapted_structure_and_accounting_contract(self):
+        structure = (ROOT / "assets" / "three-axis-structure-template.md").read_text(
+            encoding="utf-8"
+        )
+        accounting = (
+            ROOT / "references" / "accounting-control-and-consolidation.md"
+        ).read_text(encoding="utf-8")
+        for token in (
+            "P-ASSET 分支：资产边界与经营主导权",
+            "P-ASSET 分支：资产收购或业务合并",
+            "投入与实质性加工处理过程",
+            "集中度测试",
+            "确认日 / 购买日",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, structure)
+                self.assertIn(token, accounting)
+
+    def test_pe_vc_handoff_is_limited_and_installable(self):
+        asset = (ROOT / "assets" / "pe-vc-handoff-template.md").read_text(
+            encoding="utf-8"
+        )
+        skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")
+        readme = ROOT.parents[1].joinpath("README.md").read_text(encoding="utf-8")
+        for token in (
+            "仅由 P-EQUITY 筛查转出",
+            "来源事项立场",
+            "目标审阅立场",
+            "控制权 | not-sought",
+            "合并财务报表 | not-sought",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, asset)
+        self.assertIn("If `$pe-vc-transaction-docs-review` is unavailable", skill)
+        self.assertIn(
+            "https://github.com/hoangkiann-debug/PE_VC_transaction_docs_review",
+            readme,
+        )
+
+    def test_private_route_references_use_three_path_rule(self):
+        contract = "事实允许时至少比较三个方案；不足三个时列明被排除路径及原因"
+        for filename in ("private-equity-ma.md", "private-asset-ma.md"):
+            text = (ROOT / "references" / filename).read_text(encoding="utf-8")
+            with self.subTest(filename=filename):
+                self.assertIn(contract, text)
+
+    def test_default_prompt_preserves_non_structure_exception(self):
+        text = (ROOT / "agents" / "openai.yaml").read_text(encoding="utf-8")
+        self.assertIn("For structure requests", text)
+        self.assertIn("For non-structure requests", text)
+
     def test_pe_vc_handoff_asset_carries_router_context(self):
         asset = ROOT / "assets" / "pe-vc-handoff-template.md"
         self.assertTrue(asset.exists(), "PE/VC handoff asset is missing")
@@ -266,6 +354,27 @@ class SkillConsistencyTests(unittest.TestCase):
 
         self.assertIn(
             "README.md lacks product positioning: 中国投资并购决策与执行 Skill",
+            errors,
+        )
+
+    def test_validator_rejects_broken_internal_markdown_link(self):
+        spec = importlib.util.spec_from_file_location("skill_validator", VALIDATOR)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            copied_root = Path(temp_dir) / "skill"
+            shutil.copytree(ROOT, copied_root)
+            reference = copied_root / "references" / "three-axis-transaction-engine.md"
+            reference.write_text(
+                reference.read_text(encoding="utf-8")
+                + "\n[broken](../assets/not-a-real-template.md)\n",
+                encoding="utf-8",
+            )
+            errors = module.validate_skill(copied_root)
+
+        self.assertIn(
+            "broken internal link in references/three-axis-transaction-engine.md: ../assets/not-a-real-template.md",
             errors,
         )
 

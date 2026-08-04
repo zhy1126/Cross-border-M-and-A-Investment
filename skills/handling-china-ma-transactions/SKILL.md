@@ -47,7 +47,7 @@ Read [three-axis-transaction-engine.md](references/three-axis-transaction-engine
 | `P-EQUITY` | Private-company share/equity acquisitions, control investments, staged deals and statutory-merger comparison | [private-equity-ma.md](references/private-equity-ma.md) |
 | `P-ASSET` | Asset/business purchases and carve-outs | [private-asset-ma.md](references/private-asset-ma.md) |
 
-Combine routes only for a real hybrid. For pure minority financing with no control, business or asset acquisition, record the three-axis boundary, prepare [pe-vc-handoff-template.md](assets/pe-vc-handoff-template.md), then invoke `$pe-vc-transaction-docs-review`. If its document review finds rights that may create control, joint control or decisive influence, return to this Skill for `P-EQUITY` and regulatory analysis.
+Combine routes only for a real hybrid. Only after `P-EQUITY` screening confirms a private-company pure primary minority financing with both control and consolidation marked `not-sought`, prepare [pe-vc-handoff-template.md](assets/pe-vc-handoff-template.md), then invoke `$pe-vc-transaction-docs-review`. Listed-company issuance and asset/business transactions do not use this handoff. If the companion review finds rights that may create control, joint control or decisive influence, return to this Skill for `P-EQUITY` and regulatory analysis. If `$pe-vc-transaction-docs-review` is unavailable, deliver the handoff package and provide the companion installation link; do not silently continue as a PE/VC document reviewer.
 
 ## Load only what the task needs
 

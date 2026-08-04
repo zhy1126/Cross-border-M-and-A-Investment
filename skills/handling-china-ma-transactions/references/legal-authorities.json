@@ -19,6 +19,7 @@
     "www.safe.gov.cn",
     "www.cac.gov.cn",
     "www.mof.gov.cn",
+    "kjs.mof.gov.cn",
     "jrj.sh.gov.cn",
     "www.cnipa.gov.cn"
   ],
@@ -42,6 +43,7 @@
     "labor",
     "intellectual-property",
     "accounting-control",
+    "accounting-business-combination",
     "beneficial-ownership"
   ],
   "coverage_matrix": {
@@ -65,6 +67,7 @@
       "labor",
       "intellectual-property",
       "accounting-control",
+      "accounting-business-combination",
       "beneficial-ownership"
     ],
     "P-EQUITY": [
@@ -81,6 +84,7 @@
       "labor",
       "intellectual-property",
       "accounting-control",
+      "accounting-business-combination",
       "beneficial-ownership"
     ],
     "P-ASSET": [
@@ -97,6 +101,7 @@
       "labor",
       "intellectual-property",
       "accounting-control",
+      "accounting-business-combination",
       "beneficial-ownership"
     ]
   },
@@ -1024,6 +1029,50 @@
       "supersedes": [],
       "superseded_by": [],
       "caveat": "会计并表结论应由注册会计师结合事实出具；法律团队只识别治理权、回报和潜在表决权证据，不能承诺并表结果。"
+    },
+    {
+      "authority_id": "MOF-ASBE-20-BUSINESS-COMBINATIONS-2006",
+      "jurisdiction": "PRC",
+      "routes": ["L-CONTROL", "P-EQUITY", "P-ASSET"],
+      "topics": ["accounting-business-combination"],
+      "title": "企业会计准则第20号——企业合并",
+      "authority_level": "企业会计准则",
+      "issuer": "财政部",
+      "document_number": "财会〔2006〕3号",
+      "published_date": "2006-02-15",
+      "effective_date": "2007-01-01",
+      "repealed_date": null,
+      "status": "effective",
+      "pinpoint": "第二条至第五条企业合并及同一控制下合并；第十条至第十七条非同一控制下合并、购买日、可辨认资产负债和商誉",
+      "proposition": "取得构成业务的资产或经营活动组合可能适用企业合并会计；需区分同一控制下和非同一控制下，并以实际取得控制的日期识别合并日或购买日。",
+      "short_excerpt": "涉及业务的合并比照本准则规定处理。",
+      "official_url": "https://kjs.mof.gov.cn/zt/kjzzss/kuaijizhunzeshishi/200806/t20080618_46228.htm",
+      "last_verified": "2026-08-04",
+      "supersedes": [],
+      "superseded_by": [],
+      "caveat": "是否构成业务、会计分类和计量由管理层与项目审计师确认；合同名为资产购买或未取得卖方股权均不能单独决定分类。"
+    },
+    {
+      "authority_id": "MOF-ASBE-INTERPRETATION-13-2019",
+      "jurisdiction": "PRC",
+      "routes": ["L-CONTROL", "P-EQUITY", "P-ASSET"],
+      "topics": ["accounting-business-combination"],
+      "title": "企业会计准则解释第13号",
+      "authority_level": "企业会计准则解释",
+      "issuer": "财政部",
+      "document_number": "财会〔2019〕21号",
+      "published_date": "2019-12-10",
+      "effective_date": "2020-01-01",
+      "repealed_date": null,
+      "status": "effective",
+      "pinpoint": "第二部分：企业合并中取得的经营活动或资产组合是否构成业务；构成业务的要素、实质性加工处理过程及可选集中度测试",
+      "proposition": "取得的组合至少应同时具有一项投入和一项实质性加工处理过程且二者对产出能力有显著贡献，才构成业务；非同一控制下交易可选择集中度测试作为简化判断。",
+      "short_excerpt": "合并方在合并中取得的组合应当至少同时具有一项投入和一项实质性加工处理过程。",
+      "official_url": "https://kjs.mof.gov.cn/zhengcefabu/201912/t20191213_3441493.htm",
+      "last_verified": "2026-08-04",
+      "supersedes": [],
+      "superseded_by": [],
+      "caveat": "集中度测试为可选简化方式；未通过测试不等于构成业务，仍须继续按业务要素和实质性过程判断。"
     },
     {
       "authority_id": "PBOC-SAMR-BENEFICIAL-OWNER-2024",
