@@ -93,6 +93,31 @@ class SkillConsistencyTests(unittest.TestCase):
             errors,
         )
 
+    def test_validator_rejects_three_axis_reference_without_minority_financing_handoff(self):
+        spec = importlib.util.spec_from_file_location("skill_validator", VALIDATOR)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            copied_root = Path(temp_dir) / "skill"
+            shutil.copytree(ROOT, copied_root)
+            reference = (
+                copied_root / "references" / "three-axis-transaction-engine.md"
+            )
+            reference.write_text(
+                reference.read_text(encoding="utf-8").replace(
+                    "转交 PE/VC 融资文件审阅能力",
+                    "继续按 P-EQUITY 完整处理",
+                ),
+                encoding="utf-8",
+            )
+            errors = module.validate_skill(copied_root)
+
+        self.assertIn(
+            "three-axis reference lacks pure minority financing handoff: 转交 PE/VC 融资文件审阅能力",
+            errors,
+        )
+
     def test_validator_rejects_execution_asset_without_axis_mapping(self):
         spec = importlib.util.spec_from_file_location("skill_validator", VALIDATOR)
         module = importlib.util.module_from_spec(spec)

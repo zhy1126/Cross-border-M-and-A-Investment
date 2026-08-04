@@ -247,10 +247,10 @@ Update `short_description` and `default_prompt` so the Skill is presented as a t
 Use fresh agents on at least:
 
 1. an A-share 29% agreement-transfer plus issuance scenario seeking control and consolidation;
-2. a private minority investment that does not seek control or consolidation;
+2. a pure private minority financing that does not seek control, business or assets;
 3. an asset/business acquisition where the accounting perimeter needs professional confirmation.
 
-Do not reveal expected answers. Verify that outputs explicitly handle all three axes, use `not-sought` for the minority scenario, use `pending-professional-confirmation` for the asset/accounting-perimeter scenario and map execution actions back to the affected axis.
+Do not reveal expected answers. Verify that outputs explicitly handle all three axes, use `not-sought` and hand off the pure minority financing to the PE/VC skill, use `pending-professional-confirmation` for the asset/accounting-perimeter scenario and map execution actions back to the affected axis.
 
 - [ ] **Step 4: Run full verification**
 

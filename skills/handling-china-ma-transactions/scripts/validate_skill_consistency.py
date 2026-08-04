@@ -109,6 +109,16 @@ def validate_skill(root: Path) -> List[str]:
         errors.append(
             f"required three-axis reference is missing: {THREE_AXIS_REFERENCE}"
         )
+    else:
+        three_axis_reference = (root / THREE_AXIS_REFERENCE).read_text(
+            encoding="utf-8"
+        )
+        minority_handoff = "转交 PE/VC 融资文件审阅能力"
+        if minority_handoff not in three_axis_reference:
+            errors.append(
+                "three-axis reference lacks pure minority financing handoff: "
+                f"{minority_handoff}"
+            )
     if not (root / THREE_AXIS_ASSET).exists():
         errors.append(f"required three-axis asset is missing: {THREE_AXIS_ASSET}")
     else:
