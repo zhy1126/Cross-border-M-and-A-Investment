@@ -160,6 +160,26 @@ def validate_skill(root: Path) -> List[str]:
                 f"assets/{filename}"
             )
 
+    intake = root / "assets" / "matter-intake-template.md"
+    if intake.exists() and "三维目标" not in intake.read_text(encoding="utf-8"):
+        errors.append("matter intake lacks three-axis target states: 三维目标")
+
+    listed_control = references_dir / "listed-control.md"
+    if listed_control.exists() and "三维内核接口" not in listed_control.read_text(
+        encoding="utf-8"
+    ):
+        errors.append(
+            "listed-control.md lacks three-axis route interface: 三维内核接口"
+        )
+
+    accounting = references_dir / "accounting-control-and-consolidation.md"
+    if accounting.exists() and "前两维输入" not in accounting.read_text(
+        encoding="utf-8"
+    ):
+        errors.append(
+            "accounting reference lacks three-axis input contract: 前两维输入"
+        )
+
     for filename in ("due-diligence-playbook.md", "positions-and-documents.md"):
         path = references_dir / filename
         if not path.exists():

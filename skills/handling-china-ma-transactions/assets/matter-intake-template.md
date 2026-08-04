@@ -33,6 +33,16 @@ As-of / 法律核验日：
 - 主要经营地、行业、核心许可：
 - 分步/关联交易及两年内相关取得：
 
+## 三维目标
+
+| 维度 | 状态 | 必须实现的商业结果 | 不可接受结果 | 最终确认人 |
+|---|---|---|---|---|
+| 控制权 | required / not-sought / not-applicable / pending-professional-confirmation / blocked |  |  |  |
+| 收购方式 | required / not-sought / not-applicable / pending-professional-confirmation / blocked |  |  |  |
+| 合并财务报表 | required / not-sought / not-applicable / pending-professional-confirmation / blocked |  |  |  |
+
+若某一维不是交易目标，写明不追求或不适用的原因；不得留空代替判断。
+
 ## 专题触发
 
 - [ ] 上市公司/权益变动/要约/发行/重组

@@ -115,6 +115,74 @@ class SkillConsistencyTests(unittest.TestCase):
             errors,
         )
 
+    def test_validator_rejects_intake_without_three_axis_targets(self):
+        spec = importlib.util.spec_from_file_location("skill_validator", VALIDATOR)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            copied_root = Path(temp_dir) / "skill"
+            shutil.copytree(ROOT, copied_root)
+            asset = copied_root / "assets" / "matter-intake-template.md"
+            asset.write_text(
+                asset.read_text(encoding="utf-8").replace("三维目标", "交易目标"),
+                encoding="utf-8",
+            )
+            errors = module.validate_skill(copied_root)
+
+        self.assertIn(
+            "matter intake lacks three-axis target states: 三维目标",
+            errors,
+        )
+
+    def test_validator_rejects_route_reference_without_three_axis_interface(self):
+        spec = importlib.util.spec_from_file_location("skill_validator", VALIDATOR)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            copied_root = Path(temp_dir) / "skill"
+            shutil.copytree(ROOT, copied_root)
+            reference = copied_root / "references" / "listed-control.md"
+            reference.write_text(
+                reference.read_text(encoding="utf-8").replace(
+                    "三维内核接口", "结构分析接口"
+                ),
+                encoding="utf-8",
+            )
+            errors = module.validate_skill(copied_root)
+
+        self.assertIn(
+            "listed-control.md lacks three-axis route interface: 三维内核接口",
+            errors,
+        )
+
+    def test_validator_rejects_accounting_reference_without_axis_inputs(self):
+        spec = importlib.util.spec_from_file_location("skill_validator", VALIDATOR)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            copied_root = Path(temp_dir) / "skill"
+            shutil.copytree(ROOT, copied_root)
+            reference = (
+                copied_root
+                / "references"
+                / "accounting-control-and-consolidation.md"
+            )
+            reference.write_text(
+                reference.read_text(encoding="utf-8").replace(
+                    "前两维输入", "交易结构输入"
+                ),
+                encoding="utf-8",
+            )
+            errors = module.validate_skill(copied_root)
+
+        self.assertIn(
+            "accounting reference lacks three-axis input contract: 前两维输入",
+            errors,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
