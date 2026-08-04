@@ -1,0 +1,4 @@
+interface:
+  display_name: "中国投资并购交易"
+  short_description: "中国投资并购全流程尽调、结构、条款、审批与谈判辅助"
+  default_prompt: "Use $handling-china-ma-transactions to analyze this China-focused M&A transaction from the buyer perspective."
