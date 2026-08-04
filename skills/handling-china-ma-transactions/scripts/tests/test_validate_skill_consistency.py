@@ -183,6 +183,51 @@ class SkillConsistencyTests(unittest.TestCase):
             errors,
         )
 
+    def test_validator_rejects_ui_metadata_without_three_axis_prompt(self):
+        spec = importlib.util.spec_from_file_location("skill_validator", VALIDATOR)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            copied_root = Path(temp_dir) / "skill"
+            shutil.copytree(ROOT, copied_root)
+            yaml_path = copied_root / "agents" / "openai.yaml"
+            yaml_path.write_text(
+                yaml_path.read_text(encoding="utf-8").replace("三维", "全流程"),
+                encoding="utf-8",
+            )
+            errors = module.validate_skill(copied_root)
+
+        self.assertIn(
+            "openai.yaml must present the three-axis product: 三维",
+            errors,
+        )
+
+    def test_validator_rejects_readme_without_product_positioning(self):
+        spec = importlib.util.spec_from_file_location("skill_validator", VALIDATOR)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            copied_repo = Path(temp_dir) / "repo"
+            shutil.copytree(ROOT.parents[1], copied_repo)
+            copied_root = (
+                copied_repo / "skills" / "handling-china-ma-transactions"
+            )
+            readme = copied_repo / "README.md"
+            readme.write_text(
+                readme.read_text(encoding="utf-8").replace(
+                    "中国投资并购决策与执行 Skill", "中国投资并购工具"
+                ),
+                encoding="utf-8",
+            )
+            errors = module.validate_skill(copied_root)
+
+        self.assertIn(
+            "README.md lacks product positioning: 中国投资并购决策与执行 Skill",
+            errors,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

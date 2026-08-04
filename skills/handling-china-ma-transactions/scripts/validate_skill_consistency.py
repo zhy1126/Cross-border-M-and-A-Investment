@@ -227,6 +227,16 @@ def validate_skill(root: Path) -> List[str]:
         yaml_text = yaml_path.read_text(encoding="utf-8")
         if "$handling-china-ma-transactions" not in yaml_text:
             errors.append("openai.yaml default_prompt must mention the skill explicitly")
+        if "三维" not in yaml_text:
+            errors.append("openai.yaml must present the three-axis product: 三维")
+
+    readme_path = root.parents[1] / "README.md"
+    if readme_path.exists() and "中国投资并购决策与执行 Skill" not in readme_path.read_text(
+        encoding="utf-8"
+    ):
+        errors.append(
+            "README.md lacks product positioning: 中国投资并购决策与执行 Skill"
+        )
 
     for path in [skill_path, *references_dir.glob("*.md"), *(root / "assets").glob("*.md")]:
         match = PLACEHOLDER_RE.search(path.read_text(encoding="utf-8"))

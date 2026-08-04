@@ -1,10 +1,22 @@
-# Cross-border M&A Investment Skills
+# 中国投资并购决策与执行 Skill
 
-> 面向中国投资并购交易的 Codex Skill：从交易结构、法律尽调和条款谈判，一直工作到审批、交割与交割后事项。
+> 以“控制权—收购方式—合并财务报表”为三维决策内核，把交易目标转化为结构方案，并进一步落实为尽调、审批、条款、谈判、交割和失败预案。
 
-`中国法域 v1` · `Buyer 默认` · `Seller 可切换` · `44 条版本化法源记录` · `18 项自动测试`
+`中国法域 v1` · `Buyer 默认` · `Seller 可切换` · `44 条版本化法源记录` · `26 项自动测试`
 
 当前 Skill：[`handling-china-ma-transactions`](skills/handling-china-ma-transactions/SKILL.md)
+
+这不是静态法规库、模板仓库或独立软件平台。它的产品任务是：先确定交易完成后需要取得什么权力，再比较用什么方式和顺序实现，最后验证该结构能否支持预期会计处理；其余能力都是三维决策的执行层。
+
+## 产品内核：起点、重点、靶点
+
+| 维度 | 核心问题 | 主要输出 |
+|---|---|---|
+| **控制权｜起点** | 交易后买方究竟能够决定什么，从何时开始决定 | 控制权矩阵、比例与权力口径、支持事实、反证和取得时点 |
+| **收购方式｜重点** | 用哪种工具、组合和顺序实现目标，某一步失败后怎么办 | 至少三个结构方案或排除原因、成本/时间/审批/失败恢复比较 |
+| **合并财务报表｜靶点** | 结构事实能否支持会计控制、并表目标及购买日判断 | 并表支持与证据矩阵、反证、购买日候选和审计师确认包 |
+
+`L-CONTROL` 必须完整执行三维；`P-EQUITY` 和 `P-ASSET` 也要逐维给出状态，可以明确记录 `not-sought`、`not-applicable` 或 `pending-professional-confirmation`，不能静默跳过。
 
 ## 什么时候使用
 
@@ -50,19 +62,22 @@ flowchart TD
     C -->|"上市控制权"| L["L-CONTROL"]
     C -->|"非上市股权"| P["P-EQUITY"]
     C -->|"资产或业务"| Q["P-ASSET"]
-    L --> D["按需加载场景 Playbook"]
-    P --> D
-    Q --> D
+    L --> K1["① 控制权：目标权力与取得时点"]
+    P --> K1
+    Q --> K1
+    K1 --> K2["② 收购方式：方案、组合与顺序"]
+    K2 --> K3["③ 合并财务报表：支持事实与证据"]
+    K3 --> D["执行层：尽调 / 审批 / 条款 / 谈判 / 交割"]
     D --> E["四层来源：现行硬法源 / 案例观察 / 历史草案 / 市场 Playbook"]
     E --> F["问题—条款闭环：事实 → 规则 → 风险 → 交易响应"]
-    F --> G["结构备忘录 / Issue Log / 审批矩阵 / 条款意见 / 谈判计划"]
+    F --> G["三维结构备忘录 / Issue Log / 审批矩阵 / 条款意见 / 谈判计划"]
     G --> H{"完成状态"}
     H --> H1["passed"]
     H --> H2["passed_with_limitations"]
     H --> H3["blocked"]
 ```
 
-每个重大问题最终都要落到一个或多个交易工具：价格、先决条件、交割交付物、保证与披露、赔偿与责任限制、过渡期承诺、终止权、托管/留置或交割后整改。
+每个重大问题都要标明其影响控制权、收购方式或合并财务报表中的哪些维度，并最终落到一个或多个交易工具：价格、先决条件、交割交付物、保证与披露、赔偿与责任限制、过渡期承诺、终止权、托管/留置或交割后整改。
 
 ## 法源不是一个静态清单
 
@@ -83,7 +98,7 @@ flowchart TD
 <summary><strong>1. A股29%协议转让、控制权与并表</strong></summary>
 
 ```text
-使用 $handling-china-ma-transactions，从买方角度分析：我方拟协议受让一家A股上市公司29%股份，并取得过半数董事提名权，希望实现控制权变更和财务并表。请区分证券法控制、公司治理、30%要约线、经营者集中控制和会计控制，给出推荐结构、交割顺序、监管硬门、并表前提、失败恢复及Walk-away条件。法律核验截至今天。
+使用 $handling-china-ma-transactions，从买方角度分析：我方拟协议受让一家A股上市公司29%股份，并取得过半数董事提名权，希望实现控制权变更和财务并表。请按控制权、收购方式、合并财务报表三维输出，至少比较三个结构方案或说明排除原因，再给出交割顺序、监管硬门、并表证据、失败恢复及Walk-away条件。法律核验截至今天。
 ```
 
 </details>
@@ -139,6 +154,7 @@ As-of：2026-08-04
 
 **DD-001｜核心许可证即将到期**
 
+- **影响维度**：收购方式；若许可证决定相关活动和持续经营，同时影响控制权及合并财务报表判断；
 - **已确认事实**：许可证将在三个月后到期；
 - **待确认事实**：续期条件、申请进度、监管沟通及控制权变更是否触发同意；
 - **风险事件**：无法续期可能导致核心业务中断，并改变交易价值基础；
@@ -183,4 +199,4 @@ python3 scripts/validate_skill_consistency.py
 - 材料缺失、版本不清、扫描不可读或数据室未更新时，不会声称已经完成全面尽调。
 - 本 Skill 是交易分析和工作流工具，不构成对具体事项的正式法律意见。
 
-进一步阅读：[`SKILL.md`](skills/handling-china-ma-transactions/SKILL.md) · [法源与时效协议](skills/handling-china-ma-transactions/references/legal-authority-protocol.md) · [结构化法源库](skills/handling-china-ma-transactions/references/legal-authorities.json)
+进一步阅读：[`SKILL.md`](skills/handling-china-ma-transactions/SKILL.md) · [三维交易决策内核](skills/handling-china-ma-transactions/references/three-axis-transaction-engine.md) · [三维结构模板](skills/handling-china-ma-transactions/assets/three-axis-structure-template.md) · [法源与时效协议](skills/handling-china-ma-transactions/references/legal-authority-protocol.md) · [结构化法源库](skills/handling-china-ma-transactions/references/legal-authorities.json)
