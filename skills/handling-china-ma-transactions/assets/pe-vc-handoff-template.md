@@ -1,12 +1,12 @@
 # PE/VC 融资审阅交接包
 
-事项：  
+事项：
 路由：OUT-PEVC（仅由 P-EQUITY 筛查转出；L-CONTROL / P-ASSET 不得使用本交接）
 立场：来源事项立场 Buyer / Seller / 未知；不得自动映射为目标审阅立场
-As-of / 法律核验日：  
-材料范围 / 版本：  
-关键假设：  
-法域：中华人民共和国境内 / Offshore USD / VIE（待目标 Skill 确认）  
+As-of / 法律核验日：
+材料范围 / 版本：
+关键假设：
+法域：中华人民共和国境内 / Offshore USD / VIE（待目标 Skill 确认）
 完成状态：passed / passed_with_limitations / blocked
 
 ## 转交目标
