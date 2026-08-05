@@ -1,127 +1,73 @@
 ---
 name: handling-china-ma-transactions
-description: Use when advising on China-focused investment or M&A transactions, including legal due diligence, transaction structuring, listed-company control acquisitions, private share or asset purchases, SPA/APA terms, regulatory approvals, signing or closing, negotiation, and buyer- or seller-side issue analysis.
+description: Use when planning China-focused M&A transaction structures by defining control objectives, comparing transaction paths, testing consolidation evidence, and producing decision and downstream task packages.
 ---
 
-# Handling China M&A Transactions
+# 中国并购交易结构方案规划
 
-## Product
+## 产品合同
 
-Treat this as a **中国投资并购决策与执行 Skill**. Use this **三维决策内核**:
+本 Skill 只负责交易结构方案规划。固定流程是：六组输入 → 控制目标 → 路径比较 → 并表证据检验 → 八部分输出、双版本交付与四类后续任务包。
 
-1. **控制权**：define what power or rights end-state the transaction must achieve and when;
-2. **收购方式**：compare the tools, combinations and sequence used to reach that state;
-3. **合并财务报表**：test whether the resulting facts support the intended accounting assessment and evidence package.
+三维决策内核按因果顺序处理：
 
-Diligence, approvals, documents, negotiation and closing are execution layers serving the three axes. They do not replace the kernel.
+1. **控制权**：确定目标权力、适用口径和取得时点；
+2. **收购方式**：围绕控制目标比较基准、备选、兜底路径；
+3. **合并财务报表**：检验前两维形成的事实是否支持会计控制和购买日判断，不代替会计结论。
 
-## Core rules
+## 启动与立场
 
-- Default to the buyer perspective when the user does not state a side. Declare `Perspective: Buyer`; when asked for the seller, declare `Perspective: Seller` and switch substantively.
-- Use the three-axis kernel before working the lifecycle: structure → contact/NDA → diligence → documents/negotiation → signing → effectiveness/approvals → closing → post-closing/integration → claims.
-- Keep legal authority, regulatory/case observation, historical/draft material and market playbook separate.
-- Treat the supplied listed-company article and deal tables as issue seeds, never as controlling authority.
-- Convert every material fact into a transaction response: price, CP, deliverable, warranty/disclosure, indemnity/limitation, covenant, termination, security or post-close action.
-- Never promise an approval, consolidation, registration, tax treatment or foreign-law result.
+每次先填写 [固定输入模板](assets/matter-intake-template.md)，并按 [入项、路由与门控](references/intake-routing-and-gates.md) 校验六组输入。
 
-## Start every matter
+- 默认 `Perspective: Buyer`；用户指定卖方时切换为 `Perspective: Seller`。
+- 切换立场必须重新评估目标优先级、推荐理由、成立条件、改道触发器和决策请求，不能只替换称谓。
+- `start-required` 缺失时停止结构化规划；`recommendation-blocker` 未关闭时可以比较路径，但不得确定推荐，状态为 `blocked`。
+- 每一非 `confirmed` 事实都进入责任人—关闭证据闭环。
 
-Read [intake-routing-and-gates.md](references/intake-routing-and-gates.md) and [legal-authority-protocol.md](references/legal-authority-protocol.md). Establish the matter profile, as-of date, route, stage, confidentiality level, missing facts, requested deliverable and completion state.
+## 三条路由
 
-For an unannounced listed-company transaction, treat MNPI as a hard gate. Do not put names, prices, unannounced structures or document text into external searches. Use abstract legal queries and the least necessary information.
-
-## Run the three-axis kernel
-
-Read [three-axis-transaction-engine.md](references/three-axis-transaction-engine.md) for every transaction matter. Assign each axis `required`, `not-sought`, `not-applicable`, `pending-professional-confirmation` or `blocked`; never omit an axis silently.
-
-- `L-CONTROL`: always complete all three axes.
-- `P-EQUITY` and `P-ASSET`: adapt the meaning to the route and state expressly when control or consolidation is not pursued or requires professional confirmation.
-- Structure requests: compare at least three paths when facts permit; otherwise state each eliminated path and its reason.
-- Non-structure requests: identify the affected axes without fabricating a full structure memorandum.
-
-## Route
-
-| Route | Use for | Required reference |
+| 路由 | 适用范围 | 规划参考 |
 |---|---|---|
-| `L-CONTROL` | PRC listed-company control or potential-control acquisitions | [listed-control.md](references/listed-control.md) |
-| `P-EQUITY` | Private-company share/equity acquisitions, control investments, staged deals and statutory-merger comparison | [private-equity-ma.md](references/private-equity-ma.md) |
-| `P-ASSET` | Asset/business purchases and carve-outs | [private-asset-ma.md](references/private-asset-ma.md) |
+| `L-CONTROL` | 中国境内上市公司控制或潜在控制权收购 | [上市控制权路由](references/listed-control.md) |
+| `P-EQUITY` | 非上市公司股权收购、控制型增资、分步交易 | [非上市股权路由](references/private-equity-ma.md) |
+| `P-ASSET` | 资产、业务或 carve-out 收购 | [资产与业务路由](references/private-asset-ma.md) |
 
-Combine routes only for a real hybrid. Only after `P-EQUITY` screening confirms a private-company pure primary minority financing with both control and consolidation marked `not-sought`, prepare [pe-vc-handoff-template.md](assets/pe-vc-handoff-template.md), then invoke `$pe-vc-transaction-docs-review`. Listed-company issuance and asset/business transactions do not use this handoff. If the companion review finds rights that may create control, joint control or decisive influence, return to this Skill for `P-EQUITY` and regulatory analysis. If `$pe-vc-transaction-docs-review` is unavailable, deliver the handoff package and provide the companion installation link; do not silently continue as a PE/VC document reviewer.
+真实混合交易可以叠加路由；每条路由只增加与结构选择直接相关的约束、证据和后续交接事项。
 
-## Load only what the task needs
+## 固定分析与输出
 
-- Diligence or issue lists: [due-diligence-playbook.md](references/due-diligence-playbook.md).
-- SPA/APA review, price, clauses or negotiation: [positions-and-documents.md](references/positions-and-documents.md).
-- Merger control, SOE, foreign investment, ODI/FX, data, sector, labor, IP or tax interfaces: [regulatory-overlays.md](references/regulatory-overlays.md).
-- Consolidation or purchase-date questions: [accounting-control-and-consolidation.md](references/accounting-control-and-consolidation.md).
-- The supplied article, Taisheng Wind Power conditions or historical approval table: [article-and-deal-seeds.md](references/article-and-deal-seeds.md).
-- The mandatory control → acquisition method → consolidation workflow: [three-axis-transaction-engine.md](references/three-axis-transaction-engine.md).
-- Deliverable structure and completion state: [output-contract.md](references/output-contract.md).
+每次读取 [三维交易结构引擎](references/three-axis-transaction-engine.md)，形成基准、备选、兜底方案；无法形成三条时，逐一列明被排除路径及原因。然后使用 [三维结构方案模板](assets/three-axis-structure-template.md) 和 [输出合同](references/output-contract.md) 生成：
 
-The structured authority registry is [legal-authorities.json](references/legal-authorities.json). Do not load it wholesale. Query it:
+- 同一底层分析派生的管理层决策版与律师执行版；
+- 方案编号、关键事实、状态、推荐结论和时间线一致的八部分输出；
+- [四类后续任务包模板](assets/downstream-task-packages-template.md)：尽调、交易文件、审批、会计。
 
-```bash
-python3 scripts/legal_authority_lookup.py --route L-CONTROL --effective-only
-python3 scripts/legal_authority_lookup.py --topic merger-control --as-of YYYY-MM-DD --json
-python3 scripts/legal_authority_lookup.py --topic listed-issuance --freshness-days 30
-```
+四类任务包只定义为验证或落实结构所需的输入、问题、责任人、完成证据和结果回传字段；本 Skill 不执行包内专业工作。
 
-If signing, filing, announcing, closing or giving a high-stakes conclusion, open and verify the current official instrument in the same task. The registry is a versioned navigation aid, not a substitute for verification.
+## 法源与专业接口
 
-Any approval or regulatory checklist must assign each item to `pre-signing`, `effectiveness`, `pre-closing`, `post-closing` or `continuing`; do not return one undifferentiated list.
+- 法律依据按 [法源与时效协议](references/legal-authority-protocol.md) 分开现行硬法源、监管或案例观察、历史/草案材料和市场观点。
+- 结构化法源索引见 [legal-authorities.json](references/legal-authorities.json)，仅按主题和路由查询；签署、申报、公告、交割或高风险结论前复核官方原文。
+- 监管问题只作为路径约束和 [审批任务包接口](references/regulatory-overlays.md)。
+- 并表问题只作为证据检验和 [会计任务包接口](references/accounting-control-and-consolidation.md)。
+- 文章和历史交易仅作问题种子，见 [article-and-deal-seeds.md](references/article-and-deal-seeds.md)，不得替代现行法源。
 
-## Work the closed loop
+## 外国法边界
 
-For every material issue, record:
+中国法是当前硬法源范围。境外连接点只识别中国侧 ODI、外汇、国资、经营者集中、数据/技术出口和出口管制接口，并将外国法问题交给当地合资格律师。In v1, do not search for, quote, calculate or state foreign filing thresholds—even with a disclaimer—because no foreign authority/version protocol has been built.
 
-1. Confirmed fact and exact source/version;
-2. Missing fact and evidence needed;
-3. Current official basis, pinpoint and verification date;
-4. Risk event and transaction impact;
-5. Primary structure/price/term response;
-6. Buyer and seller positions;
-7. Fallback, reciprocal give/get and walk-away/escalation point;
-8. Owner, deadline, closing evidence and status.
+## 明确边界
 
-Do not use unsupported percentages as “China market practice.” If a statistic is relevant, state jurisdiction, sample, period, transaction type and that it is not law.
+本 Skill 不负责法律尽职调查或完整尽调，也不完成整套文件起草或审阅、SPA 审阅、全议题谈判、审批申报、会计结论、交割管理、整合或索赔。
 
-Even a quick risk list must keep a per-issue owner and status, plus the evidence needed to close it. A seller-side liability plan must expressly address cap, de minimis, basket, survival, knowledge qualifiers, disclosure, warranty/risk classes, concession sequence and fallbacks; do not hide these inside generic “reasonable limitation” language.
+交易文件审阅、SPA 审阅和全议题谈判转交后续专业能力；本 Skill 仅输出尽调任务包和交易文件任务包。审批事项只形成审批任务包，不执行申报；会计结论由管理层和会计师出具。交割管理、整合与索赔不属于本产品。
 
-## Control and timing discipline
+税务、估值、环境、技术、行业和外国法结论由对应专业人士提供。
 
-- Separate securities-law control, governance control, merger-control control, accounting control and foreign-investment/security-review control.
-- Separate shareholding, owned interests, exercisable voting power, meeting votes, fully diluted ownership and accounting power.
-- For the 30% offer line, identify on-market, agreement, indirect, issuance or tender-offer route before choosing the rule.
-- Separate signing, contractual effectiveness, regulatory clearance, share/asset transfer, governance change, control acquisition, accounting purchase date and post-close registration.
-- Do not use a warranty or indemnity to replace a legal prohibition, approval or standstill.
+## 完成状态
 
-## Outputs
+- `passed`：六组输入足以确定推荐，三维判断和四任务包闭环；
+- `passed_with_limitations`：推荐仍可成立，但存在已披露且不改变当前推荐的假设或外部确认；
+- `blocked`：不能启动，或阻断推荐的缺口未关闭。
 
-Use these assets when useful:
-
-- [matter-intake-template.md](assets/matter-intake-template.md)
-- [due-diligence-issue-list-template.md](assets/due-diligence-issue-list-template.md)
-- [approval-matrix-template.md](assets/approval-matrix-template.md)
-- [negotiation-plan-template.md](assets/negotiation-plan-template.md)
-- [three-axis-structure-template.md](assets/three-axis-structure-template.md)
-- [pe-vc-handoff-template.md](assets/pe-vc-handoff-template.md)
-
-The first page must state matter, route, perspective, as-of date, materials/versions, assumptions, jurisdiction and one of: `passed`, `passed_with_limitations`, `blocked`.
-
-## Boundaries
-
-- PRC law is the v1 hard-authority scope. For a foreign target, the response is incomplete unless it provides the applicable China-side ODI, FX, SOE, merger-control, data/technology-export and export-control checklist, while assigning foreign-law confirmation to qualified local counsel. In v1, do not search for, quote, calculate or state foreign filing thresholds—even with a disclaimer—because no foreign authority/version protocol has been built.
-- Tax, valuation, accounting, environmental, technical and sector issues are identified and routed; do not replace the responsible professional.
-- Do not claim full diligence when documents are missing, unreadable, outside the agreed sample or not updated to the delivery date.
-
-## Validate before delivery
-
-Run:
-
-```bash
-python3 scripts/validate_legal_authorities.py
-python3 scripts/validate_skill_consistency.py
-```
-
-Disclose unverified law, missing files, foreign-law dependencies and any limitation that prevents a reliable recommendation.
+交付前运行法源与一致性校验；不得用免责声明掩盖事实或专业确认缺口。
