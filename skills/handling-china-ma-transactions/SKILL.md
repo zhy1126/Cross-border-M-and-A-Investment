@@ -1,6 +1,6 @@
 ---
 name: handling-china-ma-transactions
-description: Use when planning China-focused M&A transaction structures by defining control objectives, comparing transaction paths, testing consolidation evidence, and producing decision and downstream task packages.
+description: Use when a China-focused M&A matter requires transaction-structure selection or comparison, including listed-company control acquisitions, staged equity acquisitions, and asset or business acquisitions.
 ---
 
 # 中国并购交易结构方案规划

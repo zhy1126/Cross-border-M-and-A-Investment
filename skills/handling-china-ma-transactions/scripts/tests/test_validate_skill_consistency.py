@@ -847,6 +847,70 @@ class SkillConsistencyTests(unittest.TestCase):
             {"accounting reference lacks three-axis input contract: 前两维输入"},
         )
 
+    def test_nonnegotiable_objective_is_a_separate_start_required_field(self):
+        text = (ROOT / "assets" / "matter-intake-template.md").read_text(
+            encoding="utf-8"
+        )
+        rows = table_rows(extract_heading_section(text, "商业目标"))
+        matching = [row for row in rows if "不可牺牲目标" in row]
+        self.assertEqual(len(matching), 1)
+        self.assertIn("start-required", matching[0])
+        self.assertNotIn("预算", matching[0])
+        self.assertNotIn("期限", matching[0])
+
+    def test_frontmatter_description_contains_triggers_not_workflow_summary(self):
+        text = (ROOT / "SKILL.md").read_text(encoding="utf-8")
+        description = next(
+            line.removeprefix("description: ")
+            for line in text.splitlines()
+            if line.startswith("description: ")
+        )
+        self.assertTrue(description.startswith("Use when "))
+        for trigger in (
+            "listed-company control acquisitions",
+            "staged equity acquisitions",
+            "asset or business acquisitions",
+        ):
+            with self.subTest(trigger=trigger):
+                self.assertIn(trigger, description)
+        for workflow in ("by defining", "comparing transaction paths", "testing consolidation", "producing decision"):
+            with self.subTest(workflow=workflow):
+                self.assertNotIn(workflow, description)
+
+    def test_unannounced_listed_connection_and_mnpi_are_a_hard_gate(self):
+        text = (ROOT / "references" / "intake-routing-and-gates.md").read_text(
+            encoding="utf-8"
+        )
+        for token in (
+            "未公告上市交易或其他上市公司连接点",
+            "MNPI 状态",
+            "未确认前不得调用外部工具、连接器或第三方",
+            "L-CONTROL、P-EQUITY 或 P-ASSET",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
+    def test_management_view_is_a_standalone_decision_deliverable(self):
+        text = (ROOT / "assets" / "three-axis-structure-template.md").read_text(
+            encoding="utf-8"
+        )
+        section = extract_heading_section(text, "管理层决策版")
+        for token in (
+            "方案 ID",
+            "关键事实",
+            "状态",
+            "推荐结论",
+            "时间线",
+            "商业差异",
+            "成立条件",
+            "主要反证",
+            "预算影响",
+            "改道触发器",
+            "管理层决策事项",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, section)
+
     def test_validator_rejects_broken_internal_markdown_link(self):
         module = load_validator()
 

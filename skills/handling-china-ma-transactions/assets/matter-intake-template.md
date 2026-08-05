@@ -25,14 +25,16 @@ As-of / 法律核验日：
 | 分析立场 | Buyer / Seller | start-required | confirmed |  |  |  |
 | 法域及基准时点 |  | start-required |  |  |  |  |
 | 保密等级及决策人 |  | assumption-allowed |  |  |  |  |
+| 未公告上市交易/上市公司连接点及 MNPI 状态 |  | start-required |  |  |  |  |
 
 ## 2. 商业目标
 
 | 字段 | 内容/来源 | 要求等级 | 事实状态 | 对方案的影响 | 责任人 | 关闭证据 |
 |---|---|---|---|---|---|---|
 | 收购目的及目标权力 |  | start-required |  |  |  |  |
+| 不可牺牲目标 |  | start-required |  |  |  |  |
 | 并表要求 |  | recommendation-blocker |  |  |  |  |
-| 预算、期限、不可牺牲目标 |  | assumption-allowed |  |  |  |  |
+| 预算、期限 |  | assumption-allowed |  |  |  |  |
 
 ## 3. 交易事实
 
