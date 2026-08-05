@@ -1,70 +1,70 @@
-# 中国投资并购事项入项表
+# 中国并购交易结构方案规划入项表
 
-事项：  
-路由：L-CONTROL / P-EQUITY / P-ASSET  
-立场：Buyer（默认） / Seller  
-As-of / 法律核验日：  
-材料范围 / 版本：  
-关键假设：  
-法域：中华人民共和国境内；跨境连接点另列  
+事项：
+路由：L-CONTROL / P-EQUITY / P-ASSET
+立场：Buyer / Seller
+As-of / 法律核验日：
+材料范围 / 版本：
+关键假设：
+法域：中华人民共和国境内；跨境连接点另列
 完成状态：passed / passed_with_limitations / blocked
-
-## 基本信息
-
-| 字段 | 内容 |
-|---|---|
-| 内部编号 |  |
-| 当前阶段 | 结构 / NDA-LOI / 尽调 / 文件 / 谈判 / 审批 / 签署 / 交割 / 整合 / 索赔 |
-| 目标签约/交割日 |  |
-| 预期交付物 |  |
-
-## 主体与控制链
-
-| 主体 | 注册地 | 最终控制人 | 国资/外资/上市属性 | 角色 | 备注 |
-|---|---|---|---|---|---|
-|  |  |  |  |  |  |
-
-## 交易与标的
-
-- 标的是股权/股份、资产、业务还是混合：
-- 交易前后比例、表决权和治理安排：
-- 对价、资金来源、融资/担保：
-- 交易目的（控制、并表、整合、退出等）：
-- 主要经营地、行业、核心许可：
-- 分步/关联交易及两年内相关取得：
 
 ## 三维目标
 
-| 维度 | 状态 | 必须实现的商业结果 | 不可接受结果 | 最终确认人 |
+| 维度 | 目标状态 | 必须实现的结果 | 不可接受结果 | 确认人 |
 |---|---|---|---|---|
 | 控制权 | required / not-sought / not-applicable / pending-professional-confirmation / blocked |  |  |  |
 | 收购方式 | required / not-sought / not-applicable / pending-professional-confirmation / blocked |  |  |  |
 | 合并财务报表 | required / not-sought / not-applicable / pending-professional-confirmation / blocked |  |  |  |
 
-若某一维不是交易目标，写明不追求或不适用的原因；不得留空代替判断。
+## 1. 事项信息
 
-## 专题触发
-
-- [ ] 上市公司/权益变动/要约/发行/重组
-- [ ] 经营者集中/境外反垄断
-- [ ] 国资
-- [ ] 外资准入/安全审查
-- [ ] ODI/外汇/境外担保
-- [ ] 数据/网络/技术出口
-- [ ] 行业许可
-- [ ] 土地房产/环保安全
-- [ ] 劳动安置
-- [ ] 税务/会计/估值
-- [ ] 其他：
-
-## 文件、事实与保密
-
-| 材料/事实 | 版本/日期 | 来源 | 状态 | 是否含MNPI/个人/竞敏信息 | 访问限制 |
-|---|---|---|---|---|---|
-|  |  |  |  |  |  |
-
-## 缺口与下一步
-
-| ID | 缺口 | 阻断性 | 对结论的影响 | 责任人 | 截止日 | 所需证据 |
+| 字段 | 内容/来源 | 要求等级 | 事实状态 | 对方案的影响 | 责任人 | 关闭证据 |
 |---|---|---|---|---|---|---|
-|  |  |  |  |  |  |  |
+| 项目阶段 |  | start-required | confirmed / assumed / missing / conflicting / external-confirmation-pending |  |  |  |
+| 分析立场 | Buyer / Seller | start-required | confirmed |  |  |  |
+| 法域及基准时点 |  | start-required |  |  |  |  |
+| 保密等级及决策人 |  | assumption-allowed |  |  |  |  |
+| 未公告上市交易/上市公司连接点及 MNPI 状态 |  | start-required |  |  |  |  |
+
+## 2. 商业目标
+
+| 字段 | 内容/来源 | 要求等级 | 事实状态 | 对方案的影响 | 责任人 | 关闭证据 |
+|---|---|---|---|---|---|---|
+| 收购目的及目标权力 |  | start-required |  |  |  |  |
+| 不可牺牲目标 |  | start-required |  |  |  |  |
+| 并表要求 |  | recommendation-blocker |  |  |  |  |
+| 预算、期限 |  | assumption-allowed |  |  |  |  |
+
+## 3. 交易事实
+
+| 字段 | 内容/来源 | 要求等级 | 事实状态 | 对方案的影响 | 责任人 | 关闭证据 |
+|---|---|---|---|---|---|---|
+| 当前及拟取得股权/权益、表决权 |  | start-required |  |  |  |  |
+| 董事会及关键经营安排 |  | recommendation-blocker |  |  |  |  |
+| 标的性质、交易对方及控制链 |  | start-required |  |  |  |  |
+
+## 4. 可选路径
+
+| 字段 | 内容/来源 | 要求等级 | 事实状态 | 对方案的影响 | 责任人 | 关闭证据 |
+|---|---|---|---|---|---|---|
+| 用户已有设想 |  | assumption-allowed |  |  |  |  |
+| 股权/股份、增资/发行、资产/业务、分步或间接路径 |  | assumption-allowed |  |  |  |  |
+| 不可接受或已排除路径 |  | assumption-allowed |  |  |  |  |
+
+## 5. 硬约束
+
+| 字段 | 内容/来源 | 要求等级 | 事实状态 | 对方案的影响 | 责任人 | 关闭证据 |
+|---|---|---|---|---|---|---|
+| 比例、审批、standstill、资金及时间 |  | recommendation-blocker |  |  |  |  |
+| 税务、上市、国资、外资、数据及其他约束 |  | recommendation-blocker |  |  |  |  |
+
+## 6. 材料与缺口
+
+| 字段 | 内容/来源 | 要求等级 | 事实状态 | 对方案的影响 | 责任人 | 关闭证据 |
+|---|---|---|---|---|---|---|
+| 已提供材料及版本 |  | start-required |  |  |  |  |
+| 未确认或冲突事实 |  | assumption-allowed |  |  |  |  |
+| 外部确认事项及预计时间 |  | assumption-allowed |  |  |  |  |
+
+要求等级只使用 `start-required`、`assumption-allowed`、`recommendation-blocker`。事实状态只使用 `confirmed`、`assumed`、`missing`、`conflicting`、`external-confirmation-pending`。每一非 `confirmed` 项都必须保留对方案的影响、责任人和关闭证据。
