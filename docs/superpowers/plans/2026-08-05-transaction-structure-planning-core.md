@@ -312,4 +312,3 @@ git commit -m "fix: close structure planning review findings"
 - [ ] **Step 6: Push the branch and update the installed copy**
 
 Push the verified commits to the configured GitHub remote. Replace the installed `~/.codex/skills/handling-china-ma-transactions` copy only after repository validation passes, then run `quick_validate.py` against the installed copy.
-
